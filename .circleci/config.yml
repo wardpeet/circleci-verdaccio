@@ -1,0 +1,23 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.0.0
+
+workflows:
+  "build":
+    jobs:
+      - bootstrap
+
+jobs:
+  bootstrap:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - checkout
+      - node/install:
+          install-yarn: true
+          node-version: 14.8.0
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: echo $(circleci tests glob "packages/*")
