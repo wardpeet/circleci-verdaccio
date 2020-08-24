@@ -12,6 +12,7 @@ jobs:
   bootstrap:
     docker:
       - image: "cimg/base:stable"
+    parallelism: 2
     steps:
       - checkout
       - node/install:
@@ -20,4 +21,4 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          command: echo $(circleci tests glob "packages/*")
+          command: yarn jest $(circleci tests glob "packages/*" | circleci tests split)
