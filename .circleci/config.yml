@@ -12,7 +12,7 @@ jobs:
   bootstrap:
     docker:
       - image: "cimg/base:stable"
-    parallelism: 2
+    parallelism: 10
     steps:
       - checkout
       - node/install:
